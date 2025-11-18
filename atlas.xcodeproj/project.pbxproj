@@ -6,13 +6,32 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		71D4E0142ECD1EAD0068A9EA /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 71D4E0132ECD1EAD0068A9EA /* Config.xcconfig */; };
+		71D4E0242ECD22210068A9EA /* ConvexMobile in Frameworks */ = {isa = PBXBuildFile; productRef = 71D4E0232ECD22210068A9EA /* ConvexMobile */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		71D4E0032ECD1E830068A9EA /* atlas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = atlas.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71D4E0132ECD1EAD0068A9EA /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		71D4E0162ECD1EDA0068A9EA /* Exceptions for "atlas" folder in "atlas" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 71D4E0022ECD1E830068A9EA /* atlas */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		71D4E0052ECD1E830068A9EA /* atlas */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				71D4E0162ECD1EDA0068A9EA /* Exceptions for "atlas" folder in "atlas" target */,
+			);
 			path = atlas;
 			sourceTree = "<group>";
 		};
@@ -23,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71D4E0242ECD22210068A9EA /* ConvexMobile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +52,7 @@
 		71D4DFFA2ECD1E830068A9EA = {
 			isa = PBXGroup;
 			children = (
+				71D4E0132ECD1EAD0068A9EA /* Config.xcconfig */,
 				71D4E0052ECD1E830068A9EA /* atlas */,
 				71D4E0042ECD1E830068A9EA /* Products */,
 			);
@@ -65,6 +86,7 @@
 			);
 			name = atlas;
 			packageProductDependencies = (
+				71D4E0232ECD22210068A9EA /* ConvexMobile */,
 			);
 			productName = atlas;
 			productReference = 71D4E0032ECD1E830068A9EA /* atlas.app */;
@@ -94,6 +116,9 @@
 			);
 			mainGroup = 71D4DFFA2ECD1E830068A9EA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				71D4E0222ECD22210068A9EA /* XCRemoteSwiftPackageReference "convex-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 71D4E0042ECD1E830068A9EA /* Products */;
 			projectDirPath = "";
@@ -109,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71D4E0142ECD1EAD0068A9EA /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +282,7 @@
 				DEVELOPMENT_TEAM = HCK9FFW6UX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = atlas/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -288,6 +315,7 @@
 				DEVELOPMENT_TEAM = HCK9FFW6UX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = atlas/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -332,6 +360,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		71D4E0222ECD22210068A9EA /* XCRemoteSwiftPackageReference "convex-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/get-convex/convex-swift";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		71D4E0232ECD22210068A9EA /* ConvexMobile */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71D4E0222ECD22210068A9EA /* XCRemoteSwiftPackageReference "convex-swift" */;
+			productName = ConvexMobile;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 71D4DFFB2ECD1E830068A9EA /* Project object */;
 }
