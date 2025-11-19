@@ -23,23 +23,6 @@ struct AthleteProgramList: View {
                 }
             }
             .navigationTitle("\(athleteName.capitalized)'s Programs")
-            .task {
-                do {
-                    let programs = try await convex.subscribe(
-                        to: "programs:getProgramsByAthlete",
-                        with: ["athlete_name": athleteName],
-                        yielding: [String].self
-                    )
-
-                    for try await programList in programs.values {
-                        self.programs = programList
-                        self.errorMessage = nil
-                    }
-                } catch {
-                    self.errorMessage = error.localizedDescription
-                    print("Convex subscription error: \(error)")
-                }
-            }
         }
     }
 }

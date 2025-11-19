@@ -21,19 +21,6 @@ struct CoachView: View {
                     }
                 }
                 .navigationTitle("Athletes")
-                .task {
-                    do {
-                        let athletes = try await convex.subscribe(to: "athletes:getUniqueAthletes", yielding: [String].self)
-
-                        for try await athleteNames in athletes.values {
-                            self.athleteList = athleteNames
-                            self.errorMessage = nil
-                        }
-                    } catch {
-                        self.errorMessage = error.localizedDescription
-                        print("Convex subscription error: \(error)")
-                    }
-            }
         }
     }
 }

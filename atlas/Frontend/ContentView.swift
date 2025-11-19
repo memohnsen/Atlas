@@ -14,25 +14,20 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selectedTab){
-            Tab("Progress", systemImage: "chart.bar", value: "Progress") {
-                LiftingProgressView()
-            }
-            Tab("History", systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90", value: "History") {
-                HistoryView()
-            }
             Tab("Home", systemImage: "house.fill", value: "Home") {
                 HomeView()
             }
             Tab("Calendar", systemImage: "calendar", value: "Calendar") {
                 TrainingCalendarView()
             }
-            
-            Tab("Profile", systemImage: "person", value: "Profile") {
-                ProfileView()
+            Tab("Progress", systemImage: "chart.bar", value: "Progress") {
+                LiftingProgressView()
+            }
+            Tab("History", systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90", value: "History") {
+                HistoryView()
             }
         }
     }
-
 }
 
 #Preview {

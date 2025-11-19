@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		71D4E0142ECD1EAD0068A9EA /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 71D4E0132ECD1EAD0068A9EA /* Config.xcconfig */; };
 		71D4E0242ECD22210068A9EA /* ConvexMobile in Frameworks */ = {isa = PBXBuildFile; productRef = 71D4E0232ECD22210068A9EA /* ConvexMobile */; };
+		71D4E0312ECE646A0068A9EA /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 71D4E0302ECE646A0068A9EA /* Functions */; };
+		71D4E0332ECE646A0068A9EA /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 71D4E0322ECE646A0068A9EA /* Supabase */; };
+		71D4E0362ECE647A0068A9EA /* PostHog in Frameworks */ = {isa = PBXBuildFile; productRef = 71D4E0352ECE647A0068A9EA /* PostHog */; };
+		71D4E0392ECE64890068A9EA /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 71D4E0382ECE64890068A9EA /* ConfettiSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +46,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71D4E0392ECE64890068A9EA /* ConfettiSwiftUI in Frameworks */,
+				71D4E0312ECE646A0068A9EA /* Functions in Frameworks */,
 				71D4E0242ECD22210068A9EA /* ConvexMobile in Frameworks */,
+				71D4E0332ECE646A0068A9EA /* Supabase in Frameworks */,
+				71D4E0362ECE647A0068A9EA /* PostHog in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +95,10 @@
 			name = atlas;
 			packageProductDependencies = (
 				71D4E0232ECD22210068A9EA /* ConvexMobile */,
+				71D4E0302ECE646A0068A9EA /* Functions */,
+				71D4E0322ECE646A0068A9EA /* Supabase */,
+				71D4E0352ECE647A0068A9EA /* PostHog */,
+				71D4E0382ECE64890068A9EA /* ConfettiSwiftUI */,
 			);
 			productName = atlas;
 			productReference = 71D4E0032ECD1E830068A9EA /* atlas.app */;
@@ -118,6 +130,9 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				71D4E0222ECD22210068A9EA /* XCRemoteSwiftPackageReference "convex-swift" */,
+				71D4E02F2ECE646A0068A9EA /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				71D4E0342ECE647A0068A9EA /* XCRemoteSwiftPackageReference "posthog-ios" */,
+				71D4E0372ECE64890068A9EA /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 71D4E0042ECD1E830068A9EA /* Products */;
@@ -370,6 +385,30 @@
 				minimumVersion = 0.6.0;
 			};
 		};
+		71D4E02F2ECE646A0068A9EA /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+		71D4E0342ECE647A0068A9EA /* XCRemoteSwiftPackageReference "posthog-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PostHog/posthog-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.35.0;
+			};
+		};
+		71D4E0372ECE64890068A9EA /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -377,6 +416,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 71D4E0222ECD22210068A9EA /* XCRemoteSwiftPackageReference "convex-swift" */;
 			productName = ConvexMobile;
+		};
+		71D4E0302ECE646A0068A9EA /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71D4E02F2ECE646A0068A9EA /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		71D4E0322ECE646A0068A9EA /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71D4E02F2ECE646A0068A9EA /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+		71D4E0352ECE647A0068A9EA /* PostHog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71D4E0342ECE647A0068A9EA /* XCRemoteSwiftPackageReference "posthog-ios" */;
+			productName = PostHog;
+		};
+		71D4E0382ECE64890068A9EA /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71D4E0372ECE64890068A9EA /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
