@@ -35,12 +35,13 @@ struct TrainingDay: Identifiable {
 
 struct TrainingCalendarView: View {
     @State private var currentDayIndex: Int = 0
+    @State private var showMonthView: Bool = false
 
     let trainingDays: [TrainingDay] = [
         TrainingDay(
             id: 1,
             date: Date(),
-            dayOfWeek: "MON",
+            dayOfWeek: "M",
             dayNumber: 18,
             programName: "4-Day Template",
             workoutType: "Day 1 - Snatch",
@@ -61,12 +62,12 @@ struct TrainingCalendarView: View {
                 ])
             ],
             duration: "90 min",
-            isCompleted: false
+            isCompleted: true
         ),
         TrainingDay(
             id: 2,
             date: Date().addingTimeInterval(86400),
-            dayOfWeek: "TUE",
+            dayOfWeek: "T",
             dayNumber: 19,
             programName: "4-Day Template",
             workoutType: "Day 2 - Clean",
@@ -85,10 +86,10 @@ struct TrainingCalendarView: View {
         TrainingDay(
             id: 3,
             date: Date().addingTimeInterval(86400 * 2),
-            dayOfWeek: "WED",
+            dayOfWeek: "W",
             dayNumber: 20,
-            programName: "Rest Day",
-            workoutType: "Active Recovery",
+            programName: "4-Day Template",
+            workoutType: "Rest Day",
             exercises: [],
             duration: "30 min",
             isCompleted: false
@@ -96,7 +97,7 @@ struct TrainingCalendarView: View {
         TrainingDay(
             id: 4,
             date: Date().addingTimeInterval(86400 * 3),
-            dayOfWeek: "THU",
+            dayOfWeek: "T",
             dayNumber: 21,
             programName: "4-Day Template",
             workoutType: "Day 3 - Jerk",
@@ -115,7 +116,7 @@ struct TrainingCalendarView: View {
         TrainingDay(
             id: 5,
             date: Date().addingTimeInterval(86400 * 4),
-            dayOfWeek: "FRI",
+            dayOfWeek: "F",
             dayNumber: 22,
             programName: "4-Day Template",
             workoutType: "Day 4 - Total",
@@ -133,10 +134,10 @@ struct TrainingCalendarView: View {
         TrainingDay(
             id: 6,
             date: Date().addingTimeInterval(86400 * 5),
-            dayOfWeek: "SAT",
+            dayOfWeek: "S",
             dayNumber: 23,
-            programName: "Rest Day",
-            workoutType: "Recovery",
+            programName: "4-Day Template",
+            workoutType: "Rest Day",
             exercises: [],
             duration: "0 min",
             isCompleted: false
@@ -144,10 +145,10 @@ struct TrainingCalendarView: View {
         TrainingDay(
             id: 7,
             date: Date().addingTimeInterval(86400 * 6),
-            dayOfWeek: "SUN",
+            dayOfWeek: "S",
             dayNumber: 24,
-            programName: "Rest Day",
-            workoutType: "Recovery",
+            programName: "4-Day Template",
+            workoutType: "Rest Day",
             exercises: [],
             duration: "0 min",
             isCompleted: false
@@ -155,75 +156,18 @@ struct TrainingCalendarView: View {
     ]
 
     var body: some View {
-        VStack(spacing: 0) {
-            headerSection
-
-            TabView(selection: $currentDayIndex) {
-                ForEach(Array(trainingDays.enumerated()), id: \.element.id) { index, day in
-                    DayDetailView(day: day)
-                        .tag(index)
-                }
-            }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-        }
-    }
-
-    private var headerSection: some View {
-        VStack(spacing: 16) {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(trainingDays[currentDayIndex].workoutType)
-                        .font(.title2)
-                        .fontWeight(.bold)
-
-                    Text(trainingDays[currentDayIndex].programName)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-
-                Spacer()
-
-                if trainingDays[currentDayIndex].isCompleted {
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.title2)
-                        .foregroundColor(.green)
-                }
-            }
-            .padding(.horizontal)
-            .padding(.top)
-
-            VStack(spacing: 12) {
-                HStack {
-                    Button(action: {
-                        if currentDayIndex > 0 {
-                            currentDayIndex -= 1
-                        }
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.title3)
-                            .foregroundColor(.blue)
+        ZStack(alignment: .top) {
+            VStack(spacing: 0) {
+                TabView(selection: $currentDayIndex) {
+                    ForEach(Array(trainingDays.enumerated()), id: \.element.id) { index, day in
+                        DayDetailView(day: day)
+                            .tag(index)
                     }
-                    .disabled(currentDayIndex == 0)
-
-                    Spacer()
-
-                    Text("November 18 - 24")
-                        .font(.headline)
-
-                    Spacer()
-
-                    Button(action: {
-                        if currentDayIndex < trainingDays.count - 1 {
-                            currentDayIndex += 1
-                        }
-                    }) {
-                        Image(systemName: "chevron.right")
-                            .font(.title3)
-                            .foregroundColor(.blue)
-                    }
-                    .disabled(currentDayIndex == trainingDays.count - 1)
                 }
-
+                .tabViewStyle(.page(indexDisplayMode: .never))
+            }
+            
+            VStack(spacing: 0) {
                 HStack(spacing: 8) {
                     ForEach(Array(trainingDays.enumerated()), id: \.element.id) { index, day in
                         DayButton(
@@ -233,15 +177,59 @@ struct TrainingCalendarView: View {
                         )
                     }
                 }
+                
+                Capsule()
+                    .frame(width: 40, height: 6)
+                    .foregroundColor(Color(.systemGray3))
+                    .padding(.vertical, 2)
             }
             .padding(.horizontal)
-            .padding(.vertical, 12)
-            .background(Color(.systemGray6))
-            .cornerRadius(16)
-            .padding(.horizontal)
+            .padding(.top, 40)
+            .glassEffect(in: .rect(cornerRadius: 32))
         }
-        .padding(.bottom, 12)
-        .background(Color(.systemBackground))
+        .ignoresSafeArea()
+        .preferredColorScheme(.dark)
+    }
+}
+
+// MARK: - Day Button
+struct DayButton: View {
+    let day: TrainingDay
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Text(day.dayOfWeek)
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(isSelected ? .blue : .secondary)
+
+                Text("\(day.dayNumber)")
+                    .font(.headline)
+                    .fontWeight(isSelected ? .bold : .medium)
+                    .foregroundColor(isSelected ? .blue : .gray)
+
+                if day.isCompleted {
+                    Circle()
+                        .fill(Color.green)
+                        .frame(width: 6, height: 6)
+                } else if !day.exercises.isEmpty {
+                    Circle()
+                        .fill(isSelected ? Color.blue : Color.white.opacity(0.5))
+                        .frame(width: 6, height: 6)
+                } else {
+                    Circle()
+                        .fill(Color.clear)
+                        .frame(width: 6, height: 6)
+                }
+            }
+            .frame(width: 45)
+            .padding(.top, 32)
+            .padding(.bottom)
+            .cornerRadius(12)
+        }
     }
 }
 
@@ -252,6 +240,44 @@ struct DayDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(day.workoutType)
+                            .font(.title2)
+                            .fontWeight(.bold)
+
+                        Text(day.programName)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+
+                    Spacer()
+
+                    HStack {
+                        Button{
+                            
+                        } label: {
+                            Image(systemName: day.isCompleted ? "trophy.fill" : "play.fill")
+                                .foregroundStyle(day.isCompleted ? .yellow : .green)
+                                .frame(width: 20, height: 20)
+                        }
+                        .padding()
+                        .glassEffect()
+                        
+                        Button{
+                            
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .foregroundStyle(.white)
+                                .frame(width: 20, height: 20)
+                        }
+                        .padding()
+                        .glassEffect()
+                    }
+                }
+                .padding(.top, 90)
+                .padding(.bottom)
+
                 if day.exercises.isEmpty {
                     restDayView
                 } else {
@@ -285,48 +311,9 @@ struct DayDetailView: View {
 
     private var workoutView: some View {
         VStack(spacing: 20) {
-            HStack {
-                HStack(spacing: 4) {
-                    Image(systemName: "clock")
-                        .font(.subheadline)
-                    Text(day.duration)
-                        .font(.subheadline)
-                }
-                .foregroundColor(.secondary)
-
-                Spacer()
-
-                Text("\(day.exercises.count) exercises")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            .padding(.horizontal, 4)
-
             ForEach(day.exercises) { exercise in
                 ExerciseCard(exercise: exercise)
             }
-
-            Button(action: {}) {
-                HStack(spacing: 8) {
-                    Image(systemName: "play.fill")
-                        .font(.headline)
-                    Text("Start Workout")
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(
-                    LinearGradient(
-                        gradient: Gradient(colors: [Color.blue, Color.purple]),
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                )
-                .cornerRadius(16)
-            }
-            .padding(.top, 8)
         }
     }
 }
@@ -341,33 +328,17 @@ struct ExerciseCard: View {
                 .font(.title3)
                 .fontWeight(.bold)
 
+            Divider()
+            
             VStack(spacing: 8) {
-                HStack {
-                    Text("SETS")
-                        .font(.caption2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.secondary)
-                        .frame(width: 50, alignment: .leading)
-
-                    Text("REPS")
-                        .font(.caption2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.secondary)
-                        .frame(width: 50, alignment: .leading)
-
-                    Text("WEIGHT")
-                        .font(.caption2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .padding(.horizontal, 12)
-
-                Divider()
-
                 ForEach(exercise.sets) { set in
                     HStack {
                         Text(set.sets)
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                            .frame(width: 50, alignment: .leading)
+                        
+                        Text("x")
                             .font(.subheadline)
                             .fontWeight(.medium)
                             .frame(width: 50, alignment: .leading)
@@ -376,21 +347,19 @@ struct ExerciseCard: View {
                             .font(.subheadline)
                             .fontWeight(.medium)
                             .frame(width: 50, alignment: .leading)
+                        
+                        Text("@")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                            .frame(width: 50, alignment: .leading)
 
-                        HStack(spacing: 4) {
-                            Text(set.percent)
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.blue)
-
-                            if let notes = set.notes {
-                                Text("• \(notes)")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        Text(set.percent)
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.blue)
+                            .frame(width: 50, alignment: .leading)
                     }
+                    .frame(maxWidth: .infinity)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
                     .background(Color(.systemGray6))
@@ -401,47 +370,6 @@ struct ExerciseCard: View {
         .padding()
         .background(Color(.systemGray6).opacity(0.5))
         .cornerRadius(16)
-    }
-}
-
-// MARK: - Day Button
-struct DayButton: View {
-    let day: TrainingDay
-    let isSelected: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            VStack(spacing: 6) {
-                Text(day.dayOfWeek)
-                    .font(.caption)
-                    .fontWeight(.semibold)
-                    .foregroundColor(isSelected ? .white : .secondary)
-
-                Text("\(day.dayNumber)")
-                    .font(.headline)
-                    .fontWeight(isSelected ? .bold : .medium)
-                    .foregroundColor(isSelected ? .white : .primary)
-
-                if day.isCompleted {
-                    Circle()
-                        .fill(isSelected ? Color.white : Color.green)
-                        .frame(width: 6, height: 6)
-                } else if !day.exercises.isEmpty {
-                    Circle()
-                        .fill(isSelected ? Color.white.opacity(0.5) : Color.blue.opacity(0.3))
-                        .frame(width: 6, height: 6)
-                } else {
-                    Circle()
-                        .fill(Color.clear)
-                        .frame(width: 6, height: 6)
-                }
-            }
-            .frame(width: 50)
-            .padding(.vertical, 12)
-            .background(isSelected ? Color.blue : Color(.systemGray6))
-            .cornerRadius(12)
-        }
     }
 }
 

@@ -12,6 +12,7 @@ struct HomeView: View {
     @StateObject var viewModel = ProgramDaysModel()
 
     var athleteName: [String] { viewModel.athleteName }
+    var programName: [String] { viewModel.programName }
 
     var body: some View {
         ScrollView {
@@ -43,7 +44,7 @@ struct HomeView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
 
-                            Text("4-Day Template")
+                            Text(programName.first ?? "None Assigned")
                                 .font(.system(size: 28, weight: .bold))
                         }
 
@@ -182,6 +183,7 @@ struct HomeView: View {
         }
         .task {
             await viewModel.fetchAthleteName()
+            await viewModel.fetchProgramName(athlete: athleteName.first ?? "")
         }
     }
 
