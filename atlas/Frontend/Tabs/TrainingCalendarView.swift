@@ -257,8 +257,8 @@ struct DayDetailView: View {
                         Button{
                             
                         } label: {
-                            Image(systemName: day.isCompleted ? "trophy.fill" : "play.fill")
-                                .foregroundStyle(day.isCompleted ? .yellow : .green)
+                            Image(systemName: day.isCompleted ? "checkmark" : "play.fill")
+                                .foregroundStyle(day.isCompleted ? .green : .green)
                                 .frame(width: 20, height: 20)
                         }
                         .padding()
@@ -268,7 +268,7 @@ struct DayDetailView: View {
                             
                         } label: {
                             Image(systemName: "ellipsis")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(.blue)
                                 .frame(width: 20, height: 20)
                         }
                         .padding()

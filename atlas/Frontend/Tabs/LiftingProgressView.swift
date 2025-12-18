@@ -24,6 +24,8 @@ struct LiftingProgressView: View {
     let lifts: [LiftData] = [
         LiftData(id: 1, liftName: "Snatch", currentPR: 110, previousPR: 105, lastTested: "11/19/2025", trend: .up),
         LiftData(id: 2, liftName: "Clean & Jerk", currentPR: 140, previousPR: 135, lastTested: "11/18/2025", trend: .up),
+        LiftData(id: 2, liftName: "Clean", currentPR: 140, previousPR: 135, lastTested: "11/18/2025", trend: .up),
+        LiftData(id: 2, liftName: "Jerk", currentPR: 140, previousPR: 135, lastTested: "11/18/2025", trend: .up),
         LiftData(id: 3, liftName: "Back Squat", currentPR: 180, previousPR: 180, lastTested: "11/15/2025", trend: .stable),
         LiftData(id: 4, liftName: "Front Squat", currentPR: 150, previousPR: 155, lastTested: "11/12/2025", trend: .down)
     ]
@@ -32,28 +34,14 @@ struct LiftingProgressView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Lifting Progress")
-                            .font(.system(size: 34, weight: .bold))
-
-                        Text("Track your personal records")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.top, 8)
+                    Text("Track your personal records")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
 
                     HStack(spacing: 12) {
                         FilterButton(title: "All Lifts", isSelected: true)
                         FilterButton(title: "Olympic", isSelected: false)
                         FilterButton(title: "Strength", isSelected: false)
-
-                        Spacer()
-
-                        Button(action: {}) {
-                            Image(systemName: "plus.circle.fill")
-                                .font(.title3)
-                                .foregroundColor(.blue)
-                        }
                     }
 
                     VStack(spacing: 16) {
@@ -64,6 +52,7 @@ struct LiftingProgressView: View {
                 }
                 .padding(.horizontal)
             }
+            .navigationTitle("Lifting Progress")
         }
     }
 }
@@ -75,15 +64,9 @@ struct LiftProgressCard: View {
     var body: some View {
         VStack(spacing: 16) {
             HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(lift.liftName)
-                        .font(.title3)
-                        .fontWeight(.bold)
-
-                    Text("Last tested: \(lift.lastTested)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
+                Text(lift.liftName)
+                    .font(.title3)
+                    .fontWeight(.bold)
 
                 Spacer()
 
@@ -94,7 +77,7 @@ struct LiftProgressCard: View {
 
             HStack(spacing: 20) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("CURRENT PR")
+                    Text("Recent Best")
                         .font(.caption2)
                         .fontWeight(.semibold)
                         .foregroundColor(.secondary)
@@ -112,7 +95,7 @@ struct LiftProgressCard: View {
                 Spacer()
 
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text("PREVIOUS")
+                    Text("PR")
                         .font(.caption2)
                         .fontWeight(.semibold)
                         .foregroundColor(.secondary)
@@ -127,17 +110,6 @@ struct LiftProgressCard: View {
                             .foregroundColor(.secondary)
                     }
                 }
-            }
-
-            if lift.currentPR != lift.previousPR {
-                HStack(spacing: 4) {
-                    Image(systemName: lift.trend == .up ? "arrow.up.right" : "arrow.down.right")
-                        .font(.caption)
-                    Text("\(abs(lift.currentPR - lift.previousPR)) kg \(lift.trend == .up ? "increase" : "decrease")")
-                        .font(.subheadline)
-                }
-                .foregroundColor(lift.trend == .up ? .green : .orange)
-                .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
         .padding(20)

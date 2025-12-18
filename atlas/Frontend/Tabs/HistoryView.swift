@@ -13,43 +13,28 @@ struct WorkoutHistory: Identifiable {
     var weekNumber: Int
     var dayNumber: Int
     var exercise: String
-    var topWeight: Int
 }
 
 struct HistoryView: View {
     let workoutHistory: [WorkoutHistory] = [
-        WorkoutHistory(id: 1, date: "11/19/2025", weekNumber: 1, dayNumber: 4, exercise: "Snatch", topWeight: 110),
-        WorkoutHistory(id: 2, date: "11/18/2025", weekNumber: 1, dayNumber: 3, exercise: "Jerk", topWeight: 130),
-        WorkoutHistory(id: 3, date: "11/17/2025", weekNumber: 1, dayNumber: 2, exercise: "Clean", topWeight: 130),
-        WorkoutHistory(id: 4, date: "11/16/2025", weekNumber: 1, dayNumber: 1, exercise: "Snatch", topWeight: 100)
+        WorkoutHistory(id: 1, date: "11/19/2025", weekNumber: 1, dayNumber: 4, exercise: "Snatch"),
+        WorkoutHistory(id: 2, date: "11/18/2025", weekNumber: 1, dayNumber: 3, exercise: "Jerk"),
+        WorkoutHistory(id: 3, date: "11/17/2025", weekNumber: 1, dayNumber: 2, exercise: "Clean"),
+        WorkoutHistory(id: 4, date: "11/16/2025", weekNumber: 1, dayNumber: 1, exercise: "Snatch")
     ]
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Training History")
-                            .font(.system(size: 34, weight: .bold))
-
-                        Text("\(workoutHistory.count) workouts completed")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.top, 8)
+                    Text("\(workoutHistory.count) workouts completed")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
 
                     HStack(spacing: 12) {
                         FilterButton(title: "All", isSelected: true)
                         FilterButton(title: "This Week", isSelected: false)
                         FilterButton(title: "This Month", isSelected: false)
-
-                        Spacer()
-
-                        Button(action: {}) {
-                            Image(systemName: "line.3.horizontal.decrease.circle")
-                                .font(.title3)
-                                .foregroundColor(.blue)
-                        }
                     }
 
                     VStack(spacing: 12) {
@@ -60,6 +45,7 @@ struct HistoryView: View {
                 }
                 .padding(.horizontal)
             }
+            .navigationTitle("Training History")
         }
     }
 }
@@ -81,32 +67,20 @@ struct WorkoutHistoryCard: View {
             .cornerRadius(12)
 
             VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    Text("Week \(workout.weekNumber) • Day \(workout.dayNumber)")
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.blue)
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
+                Text("Week \(workout.weekNumber) • Day \(workout.dayNumber)")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.blue)
 
                 Text(workout.exercise)
                     .font(.headline)
-
-                HStack(spacing: 4) {
-                    Image(systemName: "figure.strengthtraining.traditional")
-                        .font(.caption)
-                    Text("Top Set: \(workout.topWeight) kg")
-                        .font(.subheadline)
-                }
-                .foregroundColor(.secondary)
             }
 
             Spacer()
+            
+            Image(systemName: "chevron.right")
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
         .padding()
         .background(Color(.systemGray6))

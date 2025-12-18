@@ -9,22 +9,32 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State private var search = ""
-    @AppStorage("selectedTab") var selectedTab: String = "Home"
+    @State private var selectedTab: String = "Home"
 
     var body: some View {
         TabView(selection: $selectedTab){
-            Tab("Home", systemImage: "house.fill", value: "Home") {
+            Tab(value: "Home") {
                 HomeView()
+            } label: {
+                Image(systemName: "house.fill")
             }
-            Tab("Calendar", systemImage: "calendar", value: "Calendar") {
+            
+            Tab(value: "Calendar") {
                 TrainingCalendarView()
+            } label: {
+                Image(systemName: "calendar")
             }
-            Tab("Progress", systemImage: "chart.bar", value: "Progress") {
+            
+            Tab(value: "Progress") {
                 LiftingProgressView()
+            } label: {
+                Image(systemName: "chart.bar")
             }
-            Tab("History", systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90", value: "History") {
+
+            Tab(value: "History") {
                 HistoryView()
+            } label: {
+                Image(systemName: "clock.arrow.trianglehead.counterclockwise.rotate.90")
             }
         }
     }
