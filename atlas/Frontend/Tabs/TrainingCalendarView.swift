@@ -183,12 +183,11 @@ struct TrainingCalendarView: View {
                     .foregroundColor(Color(.systemGray3))
                     .padding(.vertical, 2)
             }
-            .padding(.horizontal)
+            .frame(maxWidth: .infinity)
             .padding(.top, 40)
             .glassEffect(in: .rect(cornerRadius: 32))
         }
         .ignoresSafeArea()
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -225,7 +224,7 @@ struct DayButton: View {
                         .frame(width: 6, height: 6)
                 }
             }
-            .frame(width: 45)
+            .frame(width: 50)
             .padding(.top, 32)
             .padding(.bottom)
             .cornerRadius(12)
